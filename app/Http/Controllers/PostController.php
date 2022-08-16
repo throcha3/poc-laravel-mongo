@@ -55,4 +55,15 @@ class PostController extends Controller
 
         return view('post_form', ['post' => $post]);
     }
+
+    public function delete(Request $request) {
+        \Validator::validate($request->all(), [
+          'id' => 'exists:posts,_id'
+        ]);
+
+        $post = Post::query()->find($request->get('id'));
+        $post->delete();
+
+        return redirect()->route('home');
+    }
 }
