@@ -20,3 +20,6 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', 'App\Http\Controllers\PostController@home')->middleware(['auth'])->name('home');
+Route::get('/posts/create', 'App\Http\Controllers\PostController@createForm')->middleware(['auth'])->name('post.form');
+Route::post('/posts/create', 'App\Http\Controllers\PostController@save')->middleware(['auth'])->name('post.save');
+Route::get('/posts/{id}/edit', 'App\Http\Controllers\PostController@editForm')->middleware(['auth'])->name('post.edit.form');
